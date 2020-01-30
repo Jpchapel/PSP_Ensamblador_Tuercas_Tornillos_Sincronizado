@@ -30,7 +30,7 @@ public class Almacen {
 
     public synchronized void almacenarTuerca() throws InterruptedException {
         while(tuerca + tornillo >= MAX_TORNILLOS_TUERCAS ||
-               (tuerca == MAX_TORNILLOS_TUERCAS - 1 && tornillo == 0)){
+               tuerca == MAX_TORNILLOS_TUERCAS - 1 && tornillo == 0){
             wait();
         }
         
@@ -40,7 +40,8 @@ public class Almacen {
     }
 
     public synchronized void almacenarTornillo() throws InterruptedException {
-        while(tuerca + tornillo == MAX_TORNILLOS_TUERCAS){
+        while(tuerca + tornillo == MAX_TORNILLOS_TUERCAS ||
+               tornillo == MAX_TORNILLOS_TUERCAS - 1 && tuerca == 0){
             wait();
         }
         
